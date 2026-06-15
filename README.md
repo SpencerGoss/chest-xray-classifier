@@ -4,6 +4,14 @@ Predict 14 thoracic conditions from a chest X-ray using the public **NIH ChestX-
 dataset. This package is self-contained: it downloads its own data, trains the models, and
 ships a working web app. Hand it to anyone, they can either just *read the results* or *run it themselves*.
 
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SpencerGoss/chest-xray-classifier/blob/main/chest_xray_portable_pipeline.ipynb)
+
+### Quickest way to try it (any device, no install, no training)
+Click the **Open in Colab** badge above. Then run the first setup cells and the section titled
+**"Try it now: classify an X-ray (no training needed)."** It downloads the already-trained model
+(~20 MB, once) and classifies chest X-rays right in the notebook, with the Grad-CAM heat map. You do
+not need your own laptop, a GPU, or to retrain anything.
+
 ## What's in this folder
 
 | File / folder | What it is |
