@@ -1,0 +1,8 @@
+# Don't normalize notebook line endings (avoids spurious diffs).
+*.ipynb -text
+# Binary assets.
+*.keras binary
+*.pptx binary
+*.png binary
+# Windows launcher stays CRLF.
+*.bat text eol=crlf
