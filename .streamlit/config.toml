@@ -1,0 +1,10 @@
+# App theme — matches the presentation deck (teal + amber, clean medical look).
+[theme]
+primaryColor = "#10495C"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#EEF3F4"
+textColor = "#222A30"
+font = "sans serif"
+
+[browser]
+gatherUsageStats = false
