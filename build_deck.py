@@ -1,4 +1,4 @@
-"""Builds Chest_Xray_Project.pptx, a tight, ~9-minute deck (12 slides) with a featured
+"""Builds Chest_Xray_Project.pptx, a tight, ~11-minute deck (12 slides) with a featured
 live demo, an EDA slide (condition co-occurrence + demographics), a deployment/monitoring
 slide, and speaker notes with timing. Plain language, professional theme, no overlaps.
 Reuses figures in slides_assets/ (extracted from the notebook) + one custom AUC chart."""
@@ -169,7 +169,7 @@ text(s, 1.0, 4.3, 11.3, 1.0,
      [[("Predicting 14 conditions from a chest X-ray with deep learning", 19, PALE, False)]])
 text(s, 1.0, 6.3, 11.3, 0.9,
      [[("MSBA 645 Final Project", 14, WHITE, True)], [("Team: [add names here]", 13, PALE, False)]])
-notes(s, "(~15 seconds. Say this:)  Good morning. For our project, we built a tool that looks at a "
+notes(s, "[0:00-0:15]  SAY:  Good morning. For our project, we built a tool that looks at a "
          "chest X-ray and predicts which of 14 different chest conditions might be present, things like "
          "pneumonia, fluid around the lungs, or an enlarged heart. We used a large public collection of "
          "real chest X-rays called NIH ChestX-ray14. Over the next few minutes we'll show you the data, "
@@ -189,7 +189,7 @@ text(s, MARGIN, 6.42, SW - 2*MARGIN, 0.4,
      [[("Real examples with their labels. For this project we used about 25,000 of the 112,120 images "
         "(a laptop-friendly slice).", 12, MUTE, False, True)]],
      align=PP_ALIGN.CENTER)
-notes(s, "(~1 minute. Say this:)  Here's the problem we set out to solve. You give the model one "
+notes(s, "[0:15-1:15]  SAY:  Here's the problem we set out to solve. You give the model one "
          "chest X-ray, and it gives back a yes or no for each of 14 conditions. The important part is "
          "that a single X-ray can have more than one thing wrong with it at the same time, so the model "
          "isn't picking just one answer, it's judging all 14 at once. The full dataset is huge: about "
@@ -212,7 +212,7 @@ text(s, 8.05, 2.15, SW - MARGIN - 8.3, 3.0, [
     [("That’s why we don’t trust accuracy alone. We judge by AUC (how well it tells sick from healthy) "
       "and recall (how much real disease it catches).", 14.5, INK, False)],
 ], space=1.05)
-notes(s, "(~1 minute. Say this:)  Now the catch, and this is the most important idea in our whole "
+notes(s, "[1:15-2:15]  SAY:  Now the catch, and this is the most important idea in our whole "
          "project. The data is very lopsided. About half of all the X-rays are completely normal, and "
          "several of the conditions are quite rare. So imagine a lazy model that just says 'nothing is "
          "wrong' on every single image. Because most images really are normal, that model would be "
@@ -239,7 +239,7 @@ img_fit(s, os.path.join(A, "demographics.png"), 7.0, 4.8, SW - MARGIN - 7.0, 1.9
 text(s, 7.0, 6.55, SW - MARGIN - 7.0, 0.4,
      [[("Mostly middle-aged adults (median 49), 56% male / 44% female, a generalisation flag.",
         11, MUTE, False, True)]], align=PP_ALIGN.CENTER)
-notes(s, "(~45 seconds. Say this:)  Before building anything, we looked closely at the data and "
+notes(s, "[2:15-3:00]  SAY:  Before building anything, we looked closely at the data and "
          "found two things worth sharing. First, this heat map shows that the conditions often appear "
          "together on the same X-ray. The brighter squares are the pairs that show up together a lot, "
          "for example fluid around the lung often comes with infiltration. This matters because it "
@@ -269,7 +269,7 @@ for i, (st, col) in enumerate(zip(steps, cols)):
 text(s, MARGIN, 5.55, SW - 2*MARGIN, 0.9,
      [[("This is called transfer learning. It’s one of several deep-learning techniques we use:", 14, MUTE, False, True)],
       [("transfer learning, a CNN built from scratch, fine-tuning, dropout, and Grad-CAM.", 14, MUTE, False, True)]])
-notes(s, "(~45 seconds. Say this:)  Here's how the model actually works. Training an image model "
+notes(s, "[3:00-3:45]  SAY:  Here's how the model actually works. Training an image model "
          "completely from scratch needs a massive amount of data and a powerful graphics card, which we "
          "didn't have. So instead, we borrowed a network called EfficientNet that was already trained "
          "on millions of everyday photos. It already knows how to pick out edges, shapes, and textures. "
@@ -295,7 +295,7 @@ text(s, 8.85, 4.95, SW - MARGIN - 9.1, 1.6, [
       "new data) and rarely says “yes,” so it misses real cases. A high AUC isn’t enough, so we also "
       "check recall.", 13, INK, False)],
 ], space=1.04)
-notes(s, "(~1 minute. Say this:)  We didn't just build one model and hope for the best. We tried "
+notes(s, "[3:45-4:45]  SAY:  We didn't just build one model and hope for the best. We tried "
          "several different models on exactly the same data and compared them fairly. The bar at the "
          "very bottom is a baseline that's basically guessing, it sits at 0.50. Our neural network came "
          "out on top, at about 0.73, and that's the one we kept. One thing worth pointing out: the "
@@ -318,7 +318,7 @@ rect(s, 8.3, 5.2, SW - MARGIN - 8.3, 1.35, RGBColor(0xEC, 0xF3, 0xF2), shape=MSO
 text(s, 8.55, 5.35, SW - MARGIN - 8.8, 1.1,
      [[("This is the core deep-learning lesson: with limited data, standing on a pretrained network "
         "beats building one from scratch.", 13, INK, False)]], space=1.05)
-notes(s, "(~45 seconds. Say this:)  This slide is really the heart of the deep-learning side. We "
+notes(s, "[4:45-5:30]  SAY:  This slide is really the heart of the deep-learning side. We "
          "tried three different deep-learning approaches, and the numbers tell a clean story. A network "
          "built completely from scratch only reached 0.64, because with our limited data it just can't "
          "learn good features on its own. When we reused the pretrained network instead, that's "
@@ -341,7 +341,7 @@ text(s, MARGIN, 3.65, 5.2, 2.6, [
       13.5, MUTE, False, True)],
 ], space=1.1)
 img_fit(s, os.path.join(A, "confusion.png"), 6.3, 1.55, SW - MARGIN - 6.3, 5.2)
-notes(s, "(~1 minute. Say this:)  So how good is our chosen model? On X-rays it had never seen "
+notes(s, "[5:30-6:30]  SAY:  So how good is our chosen model? On X-rays it had never seen "
          "before, it gets about 74 percent accuracy and an AUC of 0.73. Just as important, the scores "
          "on the training data and on new data are close together, 0.84 versus 0.73 on AUC, which tells "
          "us the model is genuinely learning the patterns rather than just memorizing examples. On the "
@@ -372,8 +372,8 @@ img_fit(s, os.path.join(A, "gradcam_wrong.png"), 6.7, 4.15, SW - MARGIN - 6.7, 2
 text(s, 6.7, 6.45, SW - MARGIN - 6.7, 0.4,
      [[("Heat maps from the app (backup if the live demo can’t run).", 11.5, PALE, False, True)]],
      align=PP_ALIGN.CENTER)
-notes(s, "(~2 to 3 minutes. Have the app already open before this slide. Say this as you click "
-         "through:)  This is the live demo. Let me pick a chest X-ray. Here you can see the model's "
+notes(s, "[6:30-9:00]  (have the app already open before this slide)  SAY as you click "
+         "through:  This is the live demo. Let me pick a chest X-ray. Here you can see the model's "
          "probability for each of the 14 conditions, and over here it flags the ones it thinks are "
          "present. You might notice the flagged condition isn't always the one with the highest number, "
          "and that's on purpose: instead of one fixed cutoff, each condition has its own threshold that "
@@ -415,7 +415,7 @@ text(s, MARGIN + 0.3, 6.35, SW - 2*MARGIN - 0.6, 0.7, [
      ("one prediction is a demo; logging turns it into something you can actually monitor in use. The "
       "same CSV is the single source any BI tool can read.", 13, INK, False)]],
     anchor=MSO_ANCHOR.MIDDLE, space=1.03)
-notes(s, "(~45 seconds. Say this:)  The app doesn't just make a prediction and forget it. Every "
+notes(s, "[9:00-9:45]  SAY:  The app doesn't just make a prediction and forget it. Every "
          "single time it classifies an X-ray, it saves a record: the image, the top prediction, all 14 "
          "probabilities, and how many conditions were flagged. This Monitoring tab reads all those "
          "records and gives a big-picture view: how often each condition gets flagged, how confident "
@@ -451,7 +451,7 @@ text(s, MARGIN + 0.3, 5.75, SW - 2*MARGIN - 0.6, 0.95, [
     [("images with a GPU. Ours is a lighter, laptop-friendly version of the same idea, 0.73 frozen and 0.74 fine-tuned.",
       14, INK, False)],
 ], anchor=MSO_ANCHOR.MIDDLE, space=1.05)
-notes(s, "(~1 minute. Say this:)  A few things we learned. On what worked: telling the model to pay "
+notes(s, "[9:45-10:45]  SAY:  A few things we learned. On what worked: telling the model to pay "
          "extra attention to the rare conditions instead of ignoring them, preparing the images exactly "
          "the way the network expects, judging the model on AUC and recall instead of accuracy, and "
          "using the heat maps to confirm it looks at the lungs and not the background. We also want to "
@@ -471,7 +471,7 @@ rect(s, 1.05, 4.0, 2.2, 0.08, ACCENT)
 text(s, 1.0, 4.3, 11.3, 1.0, [[("Questions?", 22, PALE, False)]])
 text(s, 1.0, 6.4, 11.3, 0.6,
      [[("Chest X-ray multi-label classifier  ·  NIH ChestX-ray14  ·  MSBA 645", 13, PALE, False)]])
-notes(s, "(~15 seconds. Say this:)  So to sum up: we built a tool that predicts 14 chest conditions "
+notes(s, "[10:45-11:00]  SAY:  So to sum up: we built a tool that predicts 14 chest conditions "
          "from an X-ray using transfer learning, we measured it honestly with AUC and recall instead of "
          "accuracy, and we wrapped it in a working app that explains its reasoning and tracks its own "
          "usage. Thank you for listening, and we're happy to take any questions.")
