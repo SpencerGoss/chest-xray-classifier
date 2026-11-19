@@ -12,6 +12,43 @@ Click the **Open in Colab** badge above. Then run the first setup cells and the 
 (~20 MB, once) and classifies chest X-rays right in the notebook, with the Grad-CAM heat map. You do
 not need your own laptop, a GPU, or to retrain anything.
 
+<table>
+<tr>
+<td width="50%"><img src="docs/images/gradcam-correct.png" alt="Grad-CAM on a correctly flagged effusion"><br><sub><b>Where the model looked (correct).</b> True finding: effusion. The heat map sits low in the chest, where fluid collects.</sub></td>
+<td width="50%"><img src="docs/images/gradcam-incorrect.png" alt="Grad-CAM on a missed case"><br><sub><b>Where it went wrong.</b> True finding: infiltration. The model also flagged nodule and mass, and the heat map shows why: it spread across both lungs.</sub></td>
+</tr>
+</table>
+
+## Results at a glance
+
+Eight models were trained on the same image features and scored on a held-out test set. **Macro AUC** (the
+average across all 14 conditions) is the headline number, because plain accuracy is misleading here: an average
+image is negative for 13.28 of the 14 conditions, so a model that always says "nothing found" looks accurate.
+
+| Model | Test macro AUC |
+|---|---|
+| **Neural network (512-256-14)** | **0.729** |
+| Neural network, deeper (512-256-128-14) | 0.725 |
+| Random forest | 0.703 |
+| Naive Bayes | 0.686 |
+
+- **Tuned thresholds.** Setting a separate decision threshold per condition (chosen on the validation set to
+  favor catching disease) raised macro recall from 0.543 to 0.577.
+- **Patient-level check.** The same patient can appear in many images. Re-splitting so no patient is in both
+  train and test gives 0.670 AUC, the more realistic number.
+- **More data helps.** Test AUC climbed from 0.619 with 1,000 training images to 0.712 with 15,000.
+
+<table>
+<tr>
+<td width="50%"><img src="docs/images/condition-frequency.png" alt="Condition frequency"><br><sub><b>Heavy class imbalance.</b> Infiltration appears in about 20,000 images; hernia in a few hundred.</sub></td>
+<td width="50%"><img src="docs/images/findings-per-image.png" alt="Findings per image"><br><sub><b>Most images have no finding,</b> which is why accuracy alone is the wrong metric.</sub></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/images/co-occurrence.png" alt="Condition co-occurrence heat map"><br><sub><b>Conditions overlap.</b> Edema shows up with pneumonia, effusion with cardiomegaly, so this is a multi-label problem.</sub></td>
+<td width="50%"><img src="docs/images/learning-curve.png" alt="Learning curve"><br><sub><b>Learning curve.</b> Test AUC kept rising with more training images, so more data is the clearest next step.</sub></td>
+</tr>
+</table>
+
 ## What's in this folder
 
 | File / folder | What it is |
@@ -38,7 +75,7 @@ explanations without running a single cell.
 ### 3. Run the web app
 
 **Easiest (Windows): double-click `run_app.bat`.** It automatically finds a compatible Python
-(3.10–3.12), sets up everything the first time, and opens the app in your browser. Leave the black
+(3.10 to 3.12), sets up everything the first time, and opens the app in your browser. Leave the black
 window open while you use the app; close it to stop. The first run takes a few minutes (it downloads
 TensorFlow); after that it starts in seconds.
 
@@ -48,17 +85,17 @@ pip install -r cxr_app/requirements.txt
 streamlit run cxr_app/app.py
 ```
 
-> **Important:** the app uses TensorFlow, which only supports **Python 3.10–3.12** (not 3.13+). If you
+> **Important:** the app uses TensorFlow, which only supports **Python 3.10 to 3.12** (not 3.13+). If you
 > run it on a newer Python the install fails and nothing opens at localhost. `run_app.bat` handles this
-> for you; for the manual way, use a 3.10–3.12 interpreter (e.g. `py -3.12 -m venv .venv` first).
+> for you; for the manual way, use a 3.10 to 3.12 interpreter (e.g. `py -3.12 -m venv .venv` first).
 
-A browser tab opens at `http://localhost:8501` (give it ~15–20 seconds the first time while the model
+A browser tab opens at `http://localhost:8501` (give it ~15 to 20 seconds the first time while the model
 loads). It has two modes (sidebar):
 
-- **Classify** — upload a chest X-ray (or pick a bundled sample) and see the predicted
+- **Classify**: upload a chest X-ray (or pick a bundled sample) and see the predicted
   conditions, which ones it flags, a Grad-CAM heat map of where the model looked, and a
   "looks right / looks off" feedback button.
-- **Monitoring** — a population-level dashboard built from the prediction log the app writes
+- **Monitoring**: a population-level dashboard built from the prediction log the app writes
   on every classification (`cxr_app/logs/predictions_log.csv`): how often each condition is
   flagged, the confidence spread, recent cases, and the feedback tally. The same CSV could
   feed Power BI or Google Sheets.
