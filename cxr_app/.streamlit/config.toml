@@ -1,4 +1,4 @@
-# App theme — matches the presentation deck (teal + amber, clean medical look).
+# App theme, matches the presentation deck (teal + amber, clean medical look).
 # This copy makes the cxr_app/ folder self-contained if run from inside it.
 [theme]
 primaryColor = "#10495C"

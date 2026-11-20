@@ -168,7 +168,7 @@ rect(s, 1.05, 4.05, 2.2, 0.08, ACCENT)
 text(s, 1.0, 4.3, 11.3, 1.0,
      [[("Predicting 14 conditions from a chest X-ray with deep learning", 19, PALE, False)]])
 text(s, 1.0, 6.3, 11.3, 0.9,
-     [[("MSBA 645 Final Project", 14, WHITE, True)], [("Team: [add names here]", 13, PALE, False)]])
+     [[("MSBA Team Project", 14, WHITE, True)], [("University of Louisville", 13, PALE, False)]])
 notes(s, "[0:00-0:15]  SAY:  Good morning. For our project, we built a tool that looks at a "
          "chest X-ray and predicts which of 14 different chest conditions might be present, things like "
          "pneumonia, fluid around the lungs, or an enlarged heart. We used a large public collection of "

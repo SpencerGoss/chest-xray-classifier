@@ -1,4 +1,4 @@
-# App theme — matches the presentation deck (teal + amber, clean medical look).
+# App theme, matches the presentation deck (teal + amber, clean medical look).
 [theme]
 primaryColor = "#10495C"
 backgroundColor = "#FFFFFF"

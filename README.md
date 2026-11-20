@@ -1,8 +1,9 @@
-# Chest X-ray Multi-Label Classifier, Portable Package
+# Chest X-ray Multi-Label Classifier
 
+A team class project from the M.S. Business Analytics program at the University of Louisville.
 Predict 14 thoracic conditions from a chest X-ray using the public **NIH ChestX-ray14**
 dataset. This package is self-contained: it downloads its own data, trains the models, and
-ships a working web app. Hand it to anyone, they can either just *read the results* or *run it themselves*.
+ships a working web app. You can either just *read the results* or *run it yourself*.
 
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/SpencerGoss/chest-xray-classifier/blob/main/chest_xray_portable_pipeline.ipynb)
 
